@@ -7,4 +7,4 @@ Site is now up, check it out and reach out for any suggestions.
 
 
 
-[Srikar.Xyz](srikar.xyz)
+[Srikar.xyz](https://srikar.xyz/#)
