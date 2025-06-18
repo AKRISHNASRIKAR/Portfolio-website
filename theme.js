@@ -26,7 +26,7 @@ const themeMap = {
   document.addEventListener('DOMContentLoaded', function() {
     var typed = new Typed('.typed', {
       strings: [        
-        "Krishna",
+        "Your Name or Title",
         "Vengeance"     
       ],
       typeSpeed: 50,
