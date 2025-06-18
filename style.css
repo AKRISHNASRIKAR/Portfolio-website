@@ -10,13 +10,11 @@
 
 /* Add main wrapper styles */
 .main-wrapper {
+  
   transition: transform var(--transition-speed);
 }
 
-/* Adjust navbar hover effect to include main wrapper movement */
-.navbar:hover ~ .main-wrapper {
-  transform: translateX(11rem); /* Adjust this value based on your navbar's expanded width */
-}
+
 
 /* Ensure main content is positioned correctly */
 .main {
@@ -33,6 +31,10 @@
   .navbar:hover ~ .main-wrapper {
     transform: translateX(11rem); /* Match the navbar's expanded width */
   }
+  .navbar:hover ~ body {
+   
+    transition: transform var(--transition-speed) ease;
+  }
 }
 
 body {
@@ -43,10 +45,11 @@ body {
   transition: var(--transition-speed);  /* Smooth transition for theme changes */
   height: 100vh;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
-  width: 0.25rem;
+  width: 0rem;
 }
 
 body::-webkit-scrollbar-track {
@@ -54,7 +57,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background: #6749b800;
+  background: #00000000;
 }
 
 main {
@@ -91,13 +94,51 @@ button:hover {
   background-color: var(--bg-primary);
   color: var(--text-secondary);
 }
+
+
 /* Navbar */
 .navbar {
   position: fixed;
   background-color: var(--bg-primary);
   transition: width 600ms ease;
-  overflow: clip;
+  overflow: hidden;
+  z-index: 10;
+  height: 100vh;
+  width: 0rem;
 }
+
+.navbar:hover {
+  width: 16rem;
+}
+
+.navbar:hover .link-text {
+  display: inline;
+}
+
+.navbar:hover .logo svg {
+  margin-left: 0%;
+}
+
+.navbar:hover .logo-text {
+  left: 0px;
+}
+
+.card:focus-within~.card, .card:hover~.card {
+  transform: translateX(130px);
+}
+
+.card:hover {
+  transform: translateY(-1rem);
+}
+
+.card:not(:first-child) {
+  margin-left: -130px;
+}
+
+
+
+
+
 
 .navbar-nav {
   list-style: none;
@@ -185,29 +226,17 @@ button:hover {
   transform: rotate(360deg);
 }
 
+
+
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar {
-      bottom: 0;
-      width: 100vw;
-      height: 5rem;
-  }
+    display: none;
+}
 
-  .logo {
-      display: none;
-  }
-
-  .navbar-nav {
-      flex-direction: row;
-  }
-
-  .nav-link {
-      justify-content: center;
-  }
-
-  main {
-      margin: 0;
-  }
+.main-wrapper {
+    margin-left: 0;
+}
 }
 
 /* Large screens */
@@ -329,10 +358,15 @@ a {
 }
 
 .card-list {
-    display: flex;
-    padding: 3rem;
-    overflow-x: auto;
-}
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
 
 .card-list::-webkit-scrollbar {
     width: 10px;
@@ -345,17 +379,13 @@ a {
 }
 
 .card-list::-webkit-scrollbar-track {
-    background: linear-gradient(90deg,#201c29,#201c29 1px,#17141d 0,#17141d);
-    display: flex;
-  justify-content: center; /* Align cards horizontally to the center */
-  align-items: flex-start; /* Align items from the top */
-  flex-wrap: wrap;
+  background: linear-gradient(90deg,#201c29,#201c29 1px,#17141d 0,#17141d);
 }
 
 
 .card {
     height: 350px;
-    width: 400px;
+    width: 400px; 
     min-width: 250px;
     padding: 1.5rem;
     border-radius: 16px;
@@ -375,51 +405,57 @@ a {
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .card-list {
-      flex-direction: column;
-      align-items: center;
-      padding: 0.5rem 0;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 2rem;
+    width: 100%;
+    overflow-x: hidden;
   }
 
   .card {
-      width: 90%;
-      margin: 0 0 1rem 0;
+    width: 90%;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.3);
+    transform: none !important;
+  }
+
+  .card:hover,
+  .card:hover ~ .card {
+    transform: none !important;
+    box-shadow: none !important;
   }
 
   .card:not(:first-child) {
-      margin-left: 0;
+    margin-left: 0;
   }
 
-  .card:hover {
-      transform: translateY(-0.5rem);
-  }
-
-  .card:hover ~ .card {
-      transform: translateY(0);
-  }
-
-  /* Navbar adjustments for small screens */
   .navbar {
-      bottom: 0;
-      width: 100vw;
-      height: 5rem;
+    display: none;
+  }
+
+  .main-wrapper {
+    margin-left: 0;
   }
 
   .logo {
-      display: none;
+    display: none;
   }
 
   .navbar-nav {
-      flex-direction: row;
+    flex-direction: row;
   }
 
   .nav-link {
-      justify-content: center;
+    justify-content: center;
   }
 
   main {
-      margin: 0 0 5rem 0; /* Add bottom margin to account for navbar */
+    margin: 0 0 5rem 0;
   }
 }
+
 
 /* Large screens */
 @media only screen and (min-width: 601px) {
@@ -433,17 +469,6 @@ a {
       margin: 0;
   }
 
-  .card:not(:first-child) {
-      margin-left: -130px;
-  }
-
-  .card:hover {
-      transform: translateY(-1rem);
-  }
-
-  .card:hover ~ .card {
-      transform: translateX(130px);
-  }
 
   /* Navbar adjustments for large screens */
   .navbar {
@@ -496,21 +521,6 @@ a {
   margin: 0 0.5rem 0.5rem 0;
 }
 
-
-
-
-
-.card:focus-within~.card, .card:hover~.card {
-    transform: translateX(130px);
-}
-
-.card:hover {
-    transform: translateY(-1rem);
-}
-
-.card:not(:first-child) {
-    margin-left: -130px;
-}
 
 
 .card-header {
@@ -620,9 +630,25 @@ a {
     border-color: white;
 }
 
+
 .translucent-box {
   background-color: rgba(0, 0, 0, 0.5); /* Adjust alpha value for transparency */
   border-radius: 10px; /* Adjust radius for desired roundness */
   padding: 20px; /* Add padding if needed */
 }
 
+/* For typed js part */
+
+.typed-container {
+  display: flex;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.static-text {
+  margin-right: 1rem; /*  space between "I'm" and the typed text */
+  color: var(--text-primary);
+}
+  
+  

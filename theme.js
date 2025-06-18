@@ -21,14 +21,22 @@ const themeMap = {
   
   document.getElementById('themeButton').onclick = toggleTheme;
  
-document.addEventListener('DOMContentLoaded', function() {
-  var typed = new Typed('.typed', {
-    strings: ["I'm Krishna", "I'm Vengeance"],
-    typeSpeed: 50,
-    backSpeed: 50,
-    loop: true,
-    loopCount: Infinity,
-    showCursor: false
-  });
-});
+  //Typed js part for text change thing, pretty good
 
+  document.addEventListener('DOMContentLoaded', function() {
+    var typed = new Typed('.typed', {
+      strings: [        
+        "Krishna",
+        "Vengeance"     
+      ],
+      typeSpeed: 50,
+      backSpeed: 50,
+      loop: true,
+      loopCount: Infinity,
+      showCursor: true,
+      cursorChar: '|', // You can change this to any character you prefer
+    });
+  });
+
+
+ 
